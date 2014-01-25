@@ -15,17 +15,17 @@ def test(app=None):
 	if app:
 		pass
 	else:
-		local('python '+BASE_DIR+'/stoic_web/manage.py test stoic_web')
+		local('python '+BASE_DIR+'/surveyjson/manage.py test surveyjson')
 
 def migrate(app_name):
 	with settings(warn_only=True):
-		result=	local('python '+BASE_DIR+'/stoic_web/manage.py schemamigration '+app_name+' --auto')
+		result=	local('python '+BASE_DIR+'/surveyjson/manage.py schemamigration '+app_name+' --auto')
 	if result.failed and not confirm("The migration of '"+app_name+"' has failed. Would you like to continue anyway?"):
 		abort("Aborting process")
 def collectstatic():
-	local('python '+BASE_DIR+'/stoic_web/manage.py collectstatic')
+	local('python '+BASE_DIR+'/surveyjson/manage.py collectstatic')
 	
 def runserver():
 	test()
 	collectstatic()
-	local('python '+BASE_DIR+'/stoic_web/manage.py runserver 0.0.0.0:8000')
+	local('python '+BASE_DIR+'/surveyjson/manage.py runserver 0.0.0.0:8001')
